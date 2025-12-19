@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毛概题目自测</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>毛概题目自测</h1>
+            <p>数据来源：课程中心</p>
+        </header>
+
+        <div id="config-section" class="card">
+            <h2>配置试卷</h2>
+            <div class="config-grid">
+                <div class="config-item">
+                    <label>单选题数量 (总共 <span id="total-single">0</span> 题)</label>
+                    <input type="number" id="num-single" min="0" value="10">
+                </div>
+                <div class="config-item">
+                    <label>多选题数量 (总共 <span id="total-multiple">0</span> 题)</label>
+                    <input type="number" id="num-multiple" min="0" value="5">
+                </div>
+                <div class="config-item">
+                    <label>判断题数量 (总共 <span id="total-judge">0</span> 题)</label>
+                    <input type="number" id="num-judge" min="0" value="5">
+                </div>
+                <div class="config-item">
+                    <label>填空题数量 (总共 <span id="total-fill">0</span> 题)</label>
+                    <input type="number" id="num-fill" min="0" value="0">
+                </div>
+            </div>
+            <button id="start-btn" class="primary-btn">开始测试</button>
+        </div>
+
+        <div id="quiz-section" class="hidden">
+            <div id="questions-container"></div>
+            <div class="actions">
+                <button id="submit-btn" class="primary-btn">提交答案</button>
+            </div>
+        </div>
+
+        <div id="result-section" class="hidden card">
+            <h2>测试结果</h2>
+            <div class="score-display">
+                得分: <span id="score">0</span> / <span id="total-score">0</span>
+            </div>
+            <div id="wrong-answers-container"></div>
+            <button id="restart-btn" class="secondary-btn">重新测试</button>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
