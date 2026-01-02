@@ -183,3 +183,72 @@ button {
 .status-wrong {
     border-left-color: var(--error-color);
 }
+
+/* Search Section Styling */
+.search-box {
+    margin-bottom: 20px;
+}
+
+#search-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+#search-results {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+#search-results:empty {
+    display: none;
+}
+
+.search-result-item {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--primary-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.search-result-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.85em;
+    color: #7f8c8d;
+}
+
+.search-result-question {
+    font-size: 1em;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.search-result-answer {
+    font-size: 0.9em;
+    color: var(--success-color);
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #f0f8ff;
+    border-radius: 4px;
+}
+
+.search-no-results {
+    text-align: center;
+    padding: 20px;
+    color: #7f8c8d;
+    font-style: italic;
+}
