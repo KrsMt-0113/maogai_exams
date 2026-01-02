@@ -41,6 +41,10 @@ function initApp() {
     document.getElementById('start-btn').addEventListener('click', startQuiz);
     document.getElementById('submit-btn').addEventListener('click', submitQuiz);
     document.getElementById('restart-btn').addEventListener('click', restartApp);
+    
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', handleSearch);
 }
 
 function startQuiz() {
@@ -250,4 +254,72 @@ function restartApp() {
     document.querySelector('.container').appendChild(document.getElementById('result-section'));
     
     window.scrollTo(0, 0);
+}
+
+function handleSearch(event) {
+    const searchTerm = event.target.value.trim().toLowerCase();
+    const resultsContainer = document.getElementById('search-results');
+    
+    // Clear previous results
+    resultsContainer.innerHTML = '';
+    
+    // If search term is empty, don't show anything
+    if (searchTerm === '') {
+        return;
+    }
+    
+    // Filter questions that match the search term
+    const matchedQuestions = allQuestions.filter(q => {
+        // Search in question text
+        if (q.question.toLowerCase().includes(searchTerm)) {
+            return true;
+        }
+        
+        // Search in options (for choice questions)
+        if (q.options && Array.isArray(q.options)) {
+            return q.options.some(opt => opt.content.toLowerCase().includes(searchTerm));
+        }
+        
+        return false;
+    });
+    
+    // Display results
+    if (matchedQuestions.length === 0) {
+        resultsContainer.innerHTML = '<div class="search-no-results">未找到匹配的题目</div>';
+        return;
+    }
+    
+    matchedQuestions.forEach(q => {
+        const resultItem = document.createElement('div');
+        resultItem.className = 'search-result-item';
+        
+        let html = `
+            <div class="search-result-header">
+                <span>题目 #${q.id}</span>
+                <span>${q.type}</span>
+            </div>
+            <div class="search-result-question">${q.question}</div>
+        `;
+        
+        // Show options for choice questions
+        if (q.options && Array.isArray(q.options)) {
+            html += '<ul class="options-list">';
+            q.options.forEach(opt => {
+                html += `<li style="padding: 5px 0;">${opt.label}. ${opt.content}</li>`;
+            });
+            html += '</ul>';
+        }
+        
+        // Show answer
+        let answerText = '';
+        if (q.type === '填空题' && Array.isArray(q.answer)) {
+            answerText = q.answer.map(a => `(${a.index}) ${a.text}`).join(', ');
+        } else {
+            answerText = q.answer;
+        }
+        html += `<div class="search-result-answer">正确答案: ${answerText}</div>`;
+        
+        resultItem.innerHTML = html;
+        resultsContainer.appendChild(resultItem);
+    });
 }
